@@ -1,0 +1,1052 @@
+Simple Queries-ex
+
+				  Прости заявки в SQL
+					Задачи
+I.За базата от данни Movies
+1. Напишете заявка, която извежда адреса на студио ‘Disney’
+2. Напишете заявка, която извежда рождената дата на актьора Jack
+Nicholson
+3. Напишете заявка, която извежда имената на актьорите, които са
+участвали във филм от 1980 или във филм, в чието заглавие има думата
+‘Knight’
+4. Напишете заявка, която извежда имената на продуцентите с нетни
+активи над 10 000 000 долара
+5. Напишете заявка, която извежда имената на актьорите, които са мъже
+или живеят на Prefect Rd.
+
+II.За базата от данни PC
+1. Напишете заявка, която извежда модел, честота и размер на диска за
+всички персонални компютри с цена под 1200 долара. Задайте
+псевдоними за атрибутите честота и размер на диска, съответно MHz и
+GB
+2. Напишете заявка, която извежда производителите на принтери без
+повторения
+3. Напишете заявка, която извежда модел, размер на паметта, размер на
+екран за лаптопите, чиято цена е над 1000 долара
+4. Напишете заявка, която извежда всички цветни принтери
+5. Напишете заявка, която извежда модел, честота и размер на диска за
+тези персонални компютри със CD 12x или 16x и цена под 2000 долара.
+
+III.За базата от данни SHIPS
+1. Напишете заявка, която извежда класа и страната за всички класове с помалко от 10 оръдия.
+2. Напишете заявка, която извежда имената на корабите, пуснати на вода
+преди 1918. Задайте псевдоним shipName на колоната.
+3. Напишете заявка, която извежда имената на корабите потънали в битка и
+имената на съответните битки.
+4. Напишете заявка, която извежда имената на корабите с име, съвпадащо
+с името на техния клас.
+5. Напишете заявка, която извежда имената на корабите, които започват с
+буквата R.
+6. Напишете заявка, която извежда имената на корабите, които съдържат 2
+или повече думи.
+
+TASK 1
+-----------------------------------------
+1. SELECT ADDRESS
+   FROM STUDIO 
+   WHERE NAME = 'Disney'
+
+2. SELECT BIRTHDATE 
+   FROM MOVIESTAR 
+   WHERE NAME = 'Jack Nicholson'
+
+3. SELECT STARNAME 
+   FROM STARSIN 
+   WHERE MOVIEYEAR = 1980 
+   OR 
+   MOVIETITLE LIKE '%Knight%'
+
+4. SELECT NAME 
+   FROM MOVIEEXEC 
+   WHERE NETWORTH > 10000000
+
+5. SELECT NAME 
+   FROM MOVIESTAR 
+   WHERE GENDER = 'M' 
+   OR 
+   ADDRESS LIKE '%Prefect Rd.%'
+------------------------------------------
+
+TASK 2
+------------------------------------------
+1. SELECT model, speed MHz, hd GB 
+   FROM pc
+   WHERE price < 1200 
+
+2. SELECT DISTINCT maker 
+   FROM product 
+   WHERE type LIKE '%Printer%'
+
+3. SELECT model, ram, screen 
+   FROM laptop 
+   WHERE price > 1000
+
+4. SELECT * 
+   FROM printer 
+   WHERE color NOT LIKE 'n'
+
+5. SELECT model, speed, hd 
+   FROM pc 
+   WHERE cd LIKE '12x' 
+   OR 
+   cd LIKE '16x' 
+   AND 
+   price < 2000
+-------------------------------------------
+
+TASK 3
+-------------------------------------------
+1. SELECT CLASS, COUNTRY 
+   FROM CLASSES WHERE NUMGUNS < 10
+
+2. SELECT NAME shipName 
+   FROM SHIPS 
+   WHERE LAUNCHED < 1918
+
+3. SELECT SHIP, BATTLE 
+   FROM OUTCOMES 
+   WHERE RESULT = 'sunk' 
+
+4. SELECT NAME 
+   FROM SHIPS 
+   WHERE NAME=CLASS
+
+5. SELECT NAME 
+   FROM SHIPS 
+   WHERE NAME LIKE 'R%
+
+6. SELECT NAME 
+   FROM SHIPS 
+   WHERE NAME LIKE '% %
+-------------------------------------------
+
+Many-Relations-ex
+
+			Заявки в SQL върху две и повече релации
+					Задачи
+I.За базата от данни Movies
+1. Напишете заявка, която извежда имената на актьорите мъже, участвали във
+филма The Usual Suspects.
+2. Напишете заявка, която извежда имената на актьорите, участвали във филми от
+1995, продуцирани от студио MGM.
+3. Напишете заявка, която извежда имената на продуцентите, които са
+продуцирали филми на студио MGM.
+4. Напишете заявка, която извежда имената на всички филми с дължина, поголяма от дължината на филма Star Wars.
+5. Напишете заявка, която извежда имената на продуцентите с нетни активи поголеми от тези на Stephen Spielberg.
+6. Напишете заявка, която извежда имената на всички филми, които са
+продуцирани от продуценти с нетни активи по-големи от тези на Stephen
+Spielberg.
+
+II.За базата от данни PC
+1. Напишете заявка, която извежда производителя и честотата на лаптопите с
+размер на диска поне 9 GB.
+2. Напишете заявка, която извежда модел и цена на продуктите, произведени от
+производител с име B.
+3. Напишете заявка, която извежда производителите, които произвеждат лаптопи,
+но не произвеждат персонални компютри.
+4. Напишете заявка, която извежда размерите на тези дискове, които се предлагат
+в поне два различни персонални компютъра (два компютъра с различен код).
+5. Напишете заявка, която извежда двойките модели на персонални компютри,
+които имат еднаква честота и памет. Двойките трябва да се показват само по
+веднъж, например само (i, j), но не и (j, i).
+6. Напишете заявка, която извежда производителите на поне два различни
+персонални компютъра с честота поне 400.
+
+III.За базата от данни SHIPS
+1. Напишете заявка, която извежда името на корабите с водоизместимост над
+50000.
+2. Напишете заявка, която извежда имената, водоизместимостта и броя оръдия на
+всички кораби, участвали в битката при Guadalcanal.
+3. Напишете заявка, която извежда имената на тези държави, които имат както
+бойни кораби, така и бойни крайцери.
+4. Напишете заявка, която извежда имената на тези кораби, които са били
+повредени в една битка, но по-късно са участвали в друга битка.
+
+TASK 1
+-------------------------------------------
+1. SELECT m1.STARNAME 
+   FROM STARSIN m1 
+   INNER JOIN MOVIESTAR m2 
+   ON m1.STARNAME = m2.NAME 
+   AND 
+   m1.MOVIETITLE = 'The Usual Suspects' 
+   AND 
+   m2.GENDER = 'M'
+
+2. SELECT STARNAME 
+   FROM STARSIN 
+   INNER JOIN MOVIE 
+   ON STARSIN.MOVIEYEAR = MOVIE.YEAR 
+   AND 
+   MOVIE.YEAR = 1995 
+   AND 
+   MOVIE.STUDIONAME = 'MGM'
+
+3. SELECT DISTINCT NAME 
+   FROM MOVIEEXEC 
+   INNER JOIN MOVIE 
+   ON MOVIEEXEC.CERT# = MOVIE.PRODUCERC# 
+   AND
+   MOVIE.STUDIONAME = 'MGM'
+
+4. SELECT m1.TITLE 
+   FROM MOVIE m1 
+   INNER JOIN MOVIE m2 
+   ON m2.TITLE = 'Star Wars' 
+   AND 
+   m1.LENGTH > m2.LENGTH
+
+5. SELECT t1.NAME 
+   FROM MOVIEEXEC t1 
+   INNER JOIN MOVIEEXEC t2 
+   ON t2.NAME = 'Stephen Spielberg' 
+   AND 
+   t1.NETWORTH > t2.NETWORTH
+
+6. SELECT m1.TITLE 
+   FROM MOVIE m1 
+   INNER JOIN MOVIEEXEC m2 
+   ON m1.PRODUCERC# = m2.CERT# 
+   INNER JOIN MOVIEEXEC m3 
+   ON m3.NAME = 'Stephen Spielberg' 
+   AND 
+   m2.NETWORTH > m3.NETWORTH
+---------------------------------------------
+
+TASK 2
+---------------------------------------------
+1. SELECT maker, laptop.speed 
+   FROM product
+   INNER JOIN laptop ON product.model = laptop.model 
+   WHERE laptop.hd >= 9
+
+2. SELECT DISTINCT product.model, COALESCE(laptop.price, pc.price, printer.price) AS price 
+   FROM product
+   FULL OUTER JOIN laptop ON product.model = laptop.model
+   FULL OUTER JOIN pc ON product.model = pc.model
+   FULL OUTER JOIN printer ON product.model = printer.model
+   WHERE product.maker = 'B'
+
+3. SELECT DISTINCT product.maker 
+   FROM product
+   WHERE product.type = 'Laptop' 
+   AND
+   product.maker NOT IN
+   (SELECT maker FROM product WHERE product.type = 'PC')
+
+4.
+--SELECT f.hd FROM pc AS f
+--GROUP BY f.hd
+--Having Count(f.hd)>=2
+
+SELECT DISTINCT p1.hd
+FROM PC p1
+JOIN PC p2
+ON p1.code != p2.code
+WHERE p1.hd = p2.hd
+GROUP BY p1.hd 
+Having Count(p1.hd)>=2
+
+5. SELECT P.model AS 'model', L.model AS 'model' 
+   FROM pc P
+   INNER JOIN pc L ON P.speed = L.speed 
+   AND 
+   P.ram = L.ram 
+   AND 
+   P.model < L.model
+
+6. SELECT product.maker FROM 
+   (SELECT p.maker, l.model FROM product p, pc l
+   WHERE l.speed >= 400 AND l.model = p.model) product
+   GROUP BY product.maker
+   Having COUNT(product.model)>2
+---------------------------------------------
+
+TASK 3
+---------------------------------------------
+1. SELECT SHIPS.NAME FROM 
+  (SELECT sh.NAME FROM SHIPS sh, CLASSES cl
+  WHERE sh.CLASS = cl.CLASS AND cl.DISPLACEMENT > 50000) SHIPS
+  GROUP BY SHIPS.NAME
+
+  SELECT sh.name FROM SHIPS sh
+  INNER JOIN classes cl ON sh.class = cl.class
+  AND
+  cl.displacement > 50000
+
+2. SELECT outcomes.ship, classes.displacement, classes.numguns
+   FROM outcomes
+   INNER JOIN ships ON outcomes.ship = ships.name
+   INNER JOIN classes ON ships.class = classes.class
+   AND
+   outcomes.battle = 'Guadalcanal'
+
+3. SELECT DISTINCT one.country FROM classes one
+   INNER JOIN classes two ON one.country = two.country
+   AND
+   one.type != two.type
+
+4. SELECT one.ship FROM outcomes one
+   INNER JOIN outcomes two ON one.ship = two.ship
+   AND
+   one.result = 'damaged'
+   AND
+   one.battle != two.battle
+
+---------------------------------------------
+
+Subqueries-ex
+
+					 Подзаявки
+					 Упражнения
+I.За базата от данни Movies
+1. Напишете заявка, която извежда имената на актрисите, които са също и
+продуценти с нетни активи над 10 милиона.
+2. Напишете заявка, която извежда имената на тези актьори (мъже и жени),
+които не са продуценти.
+3. Напишете заявка, която извежда имената на всички филми с дължина,
+по-голяма от дължината на филма ‘Star Wars’
+4. Напишете заявка, която извежда имената на продуцентите и имената на
+филмите за всички филми, които са продуцирани от продуценти с нетни
+активи по-големи от тези на ‘Merv Griffin’
+
+II.За базата от данни PC
+1. Напишете заявка, която извежда производителите на персонални
+компютри с честота над 500.
+2. Напишете заявка, която извежда код, модел и цена на принтерите с най-висока цена.
+3. Напишете заявка, която извежда лаптопите, чиято честота е по-ниска от
+честотата на всички персонални компютри.
+4. Напишете заявка, която извежда модела и цената на продукта (PC,
+лаптоп или принтер) с най-висока цена.
+5. Напишете заявка, която извежда производителя на цветния принтер с
+най-ниска цена.
+6. Напишете заявка, която извежда производителите на тези персонални
+компютри с най-малко RAM памет, които имат най-бързи процесори.
+
+III.За базата от данни SHIPS
+1. Напишете заявка, която извежда страните, чиито кораби са с най-голям
+брой оръдия.
+2. Напишете заявка, която извежда класовете, за които поне един от
+корабите е потънал в битка.
+3. Напишете заявка, която извежда името и класа на корабите с 16 инчови
+оръдия.
+4. Напишете заявка, която извежда имената на битките, в които са
+участвали кораби от клас ‘Kongo’.
+5. Напишете заявка, която извежда класа и името на корабите, чиито брой
+оръдия е по-голям или равен на този на корабите със същия калибър
+оръдия.
+
+TASK 1
+----------------------------------------------------------------------------
+1. SELECT moviestar.name FROM moviestar
+   INNER JOIN movieexec ON moviestar.name = movieexec.name
+   WHERE
+   moviestar.gender = 'F'
+   AND
+   movieexec.networth > 10000000
+
+SELECT name FROM moviestar 
+WHERE gender = 'F'
+AND name IN (SELECT name FROM movieexec WHERE netwroth > 1000000000);
+
+SELECT name FROM moviestar WHERE gender = 'F'
+INTERSECT
+SELECT name FROM movieexec WHERE netwroth > 1000000000
+
+-- Include birthdate to the result
+SELECT name, birthdate
+FROM moviestar 
+WHERE gender = 'F'
+AND name IN (SELECT name FROM movieexec WHERE networth > 10000000);
+
+SELECT s.name, s.birthdate
+FROM moviestar s
+JOIN movieexec e ON s.name = e.name
+WHERE s.gender = 'F'
+AND e.networth > 10000000;
+
+SELECT s.name, s.birthdate
+FROM moviestar s
+JOIN (
+        SELECT name FROM moviestar WHERE gender = 'F'
+        INTERSECT
+        SELECT name FROM movieexec WHERE networth > 10000000
+) d ON d.name = s.name;
+
+2. SELECT DISTINCT moviestar.name FROM moviestar
+   INNER JOIN movieexec ON moviestar.name != movieexec.name -> грешно е
+
+SELECT name 
+FROM moviestar
+WHERE name NOT IN (SELECT name FROM movieexec);
+
+SELECT name FROM moviestar
+EXCEPT
+SELECT name FROM movieexec
+
+3. SELECT * 
+   FROM movie 
+   WHERE length > ALL(SELECT length FROM movie WHERE title = 'Star Wars')
+
+4. SELECT movie.title, producers.name FROM movieexec producers
+   INNER JOIN movie ON producers.CERT# = movie.PRODUCERC#
+   INNER JOIN movieexec helpProducers ON producers.name != helpProducers.name
+   AND
+   helpProducers.name = 'Merv Griffin'
+   AND
+   producers.networth > helpProducers.networth
+
+--Solution
+SELECT m.title, m.year, me.name
+FROM movie m
+JOIN movieexec me ON m."PRODUCER#" = me."CERT#"
+WHERE me.netwroth > (SELECT networth FROM movieexec WHERE name = 'Merv Griffin');
+
+--------------------------------------------------------------------------------
+
+TASK 2
+--------------------------------------------------------------------------------
+1. SELECT product.maker FROM product, pc
+   WHERE product.model = pc.model
+   AND
+   pc.speed > 500
+   GROUP BY product.maker
+
+   SELECT DISTINCT product.maker FROM product
+   INNER JOIN pc ON product.model = pc.model
+   AND
+   pc.speed > 500
+
+   SELECT product.maker FROM 
+   (SELECT product.maker FROM product, pc
+   WHERE product.model = pc.model
+   AND
+   pc.speed > 500) product
+   GROUP BY product.maker
+
+2. SELECT one.code, one.model, one.price 
+   FROM printer AS one
+   WHERE one.price = (SELECT MAX(price) FROM printer)
+
+3. SELECT DISTINCT l.code, l.model, l.speed, l.ram, l.hd, l.price, l.screen 
+   FROM laptop AS l
+   WHERE l.speed < ALL (SELECT pc.speed FROM pc)
+
+4. SELECT model, price FROM 
+   (SELECT model, price FROM pc
+    UNION
+    SELECT model, price FROM laptop
+    UNION
+    SELECT model, price FROM printer) M1
+   WHERE M1.price >= ALL(SELECT price FROM pc
+                          UNION ALL
+			  SELECT price FROM laptop
+	                  UNION ALL
+			  SELECT price FROM printer)
+
+
+   SELECT model, price FROM 
+   (SELECT model, price FROM pc
+    UNION ALL
+    SELECT model, price FROM laptop
+    UNION ALL
+    SELECT model, price FROM printer) M1
+   WHERE M1.price IN (SELECT MAX(price) FROM
+   (SELECT price FROM pc
+    UNION ALL
+    SELECT price FROM laptop
+    UNION ALL
+    SELECT price FROM printer) M2)
+
+
+SELECT model, price FROM laptop
+UNION ALL
+SELECT model, price FROM pc
+UNION ALL
+SELECT model, price FROM printer
+ORDER BY price DESC
+LIMIT 1; -- POSTGRES SQL, MySQL
+
+SELECT TOP 1* 
+FROM (
+	SELECT model, price FROM laptop
+	UNION ALL
+	SELECT model, price FROM pc
+	UNION ALL
+	SELECT model, price FROM printer
+) d
+ORDER BY price DESC -- MsSQL
+
+UNION ALL
+SELECT model, price FROM laptop WHERE price >= ALL (SELECT price FROM laptop
+						    UNION ALL
+						    SELECT price FROM pc
+						    UNION ALL
+						    SELECT price FROM printer)
+
+
+5. SELECT product.maker FROM product
+   INNER JOIN printer ON product.model = printer.model
+   WHERE printer.color = 'y'
+   AND 
+   printer.price = (SELECT MIN(price) FROM printer WHERE printer.color = 'y')
+
+6. SELECT product.maker FROM product
+   INNER JOIN pc ON pc.model = product.model
+   WHERE pc.ram = (SELECT MIN(ram) FROM pc)
+   AND
+   pc.speed = (SELECT MAX(speed) FROM pc WHERE pc.ram = (SELECT MIN(ram) FROM pc));
+
+   SELECT product.maker FROM product
+   INNER JOIN pc ON pc.model = product.model
+   WHERE pc.ram = (SELECT MIN(ram) FROM pc)
+   AND
+   pc.speed >= ALL(SELECT speed FROM pc WHERE pc.ram = (SELECT MIN(ram) FROM pc))
+
+
+SELECT maker FROM product WHERE model IN (
+SELECT * FROM pc
+WHERE speed >= ALL (SELECT speed FROM pc WHERE ram <= ALL (SELECT ram FROM pc))
+AND ram <= ALL (SELECT ram FROM pc)
+);
+--------------------------------------------------------------------------------
+
+TASK 3
+--------------------------------------------------------------------------------
+1. SELECT DISTINCT classes.country FROM classes
+   WHERE classes.numguns = (SELECT MAX(numguns) FROM classes)
+
+2. SELECT DISTINCT ships.class FROM ships
+   INNER JOIN outcomes ON ships.name = outcomes.ship
+   WHERE outcomes.result = 'sunk'
+
+3. SELECT ships.name, ships.class FROM ships
+   INNER JOIN classes ON ships.class = classes.class
+   WHERE classes.bore = 16
+
+   SELECT ships.name, ships.class FROM ships, classes
+   WHERE ships.class = classes.class
+   AND
+   classes.bore = 16
+
+4. SELECT outcomes.battle FROM outcomes
+   INNER JOIN ships ON ships.name = outcomes.ship
+   WHERE ships.class = 'Kongo'
+
+5. SELECT ships.class, ships.name FROM ships
+   INNER JOIN classes c1 ON ships.class = c1.class
+   WHERE c1.numguns >= ALL(SELECT numguns FROM classes WHERE classes.bore = c1.bore)
+   ORDER BY ships.class -> правилно е
+
+--------------------------------------------------------------------------------
+
+					Съединения
+					Упражнения
+I. За базата от данни Movies
+1. Напишете заявка, която извежда името на продуцента и имената на
+филмите, продуцирани от продуцента на филма ‘Star Wars’.
+2. Напишете заявка, която извежда имената на продуцентите на филмите, в
+които е участвал ‘Harrison Ford’.
+3. Напишете заявка, която извежда името на студиото и имената на
+актьорите, участвали във филми, произведени от това студио, подредени
+по име на студио.
+4. Напишете заявка, която извежда имената на актьорите, участвали във
+филми на продуценти с най-големи нетни активи.
+5. Напишете заявка, която извежда имената на актьорите, които не са
+участвали в нито един филм.
+
+II. За базата от данни PC
+1. Напишете заявка, която извежда производител, модел и тип на продукт
+за тези производители, за които съответният продукт не се продава
+(няма го в таблиците PC, Laptop или Printer)
+2. Намерете всички производители, които правят както лаптопи, така и
+принтери.
+3. Намерете размерите на тези твърди дискове, които се появяват в два
+или повече модела лаптопи.
+4. Намерете всички модели персонални компютри, които нямат регистриран
+производител.
+
+III. За базата от данни SHIPS
+1. Напишете заявка, която извежда цялата налична информация за всеки
+кораб, включително и данните за неговия клас. В резултата не трябва да
+се включват тези класове, които нямат кораби.
+2. Повторете горната заявка, като този път включите в резултата и
+класовете, които нямат кораби, но съществуват кораби със същото име
+като тяхното.
+3. За всяка страна изведете имената на корабите, които никога не са
+участвали в битка.
+4. Намерете имената на всички кораби с поне 7 оръдия, пуснати на вода
+през 1916, но наречете резултатната колона Ship Name.
+5. Изведете имената на всички потънали в битка кораби, името и дата на
+провеждане на битките, в които те са потънали. Подредете резултата по
+име на битката.
+6. Намерете името, водоизместимостта и годината на пускане на вода на
+всички кораби, които имат същото име като техния клас.
+7. Намерете всички класове кораби, от които няма пуснат на вода нито един
+кораб.
+8. Изведете името, водоизместимостта и броя оръдия на корабите,
+участвали в битката ‘North Atlantic’, а също и резултата от битката.
+
+TASK 1
+--------------------------------------------------------------------------------
+1. SELECT movie.title, movieexec.name FROM movieexec
+   INNER JOIN movie ON movie.producerc# = movieexec.cert#
+   WHERE movieexec.cert# = (SELECT producerc# FROM movie WHERE title = 'Star Wars')
+
+2. SELECT DISTINCT movieexec.name FROM movieexec
+   INNER JOIN movie ON movieexec.cert# = movie.producerc#
+   INNER JOIN starsin ON movie.title = starsin.movietitle
+   WHERE starname = 'Harrison Ford'
+
+3. SELECT DISTINCT m.studioname, s.starname 
+   FROM movie m 
+   JOIN starsin s ON m.title = s.movietitle 
+   AND m.year = s.movieyear
+   ORDER BY m.studioname, s.starname;
+
+4. SELECT starsIn.starName, movieexec.networth, movie.title FROM starsIn
+   INNER JOIN movie ON starsIn.movieTitle = movie.title
+   INNER JOIN movieexec ON movie.producerc# = movieexec.cert#
+   WHERE movieexec.networth = (SELECT MAX(two.networth) FROM movieexec two)
+
+5. SELECT moviestar.name FROM moviestar
+   WHERE moviestar.name NOT IN (SELECT starsIn.starName FROM starsIn)
+
+--------------------------------------------------------------------------------
+
+TASK 2
+--------------------------------------------------------------------------------
+1. SELECT product.maker, product.model, product.type FROM product
+   WHERE product.model NOT IN (SELECT pc.model FROM pc)
+   AND
+   product.model NOT IN (SELECT laptop.model FROM laptop)
+   AND
+   product.model NOT IN (SELECT printer.model FROM printer)
+
+2. SELECT DISTINCT one.maker FROM product one
+   INNER JOIN product two ON one.maker = two.maker
+   AND
+   one.type = 'Laptop' AND two.type = 'Printer'
+
+3. SELECT laptop.hd FROM laptop
+   GROUP BY laptop.hd
+   HAVING COUNT(laptop.model) >=2
+
+SELECT DISTINCT l1.hd 
+FROM laptop l1 
+JOIN laptop l2 ON l1.hd = l2.hd AND l1.model != l2.model
+
+4. SELECT pc.model FROM pc
+   WHERE pc.model NOT IN (SELECT product.model FROM product)
+
+--------------------------------------------------------------------------------
+
+TASK 3
+--------------------------------------------------------------------------------
+1. SELECT * FROM ships, classes
+   WHERE ships.class = classes.class
+
+3. SELECT classes.country, ships.name FROM ships
+   INNER JOIN classes ON classes.class = ships.class
+   WHERE ships.name NOT IN (SELECT outcomes.ship FROM outcomes)
+   ORDER BY classes.country
+
+4. SELECT ships.name as 'Ship Name' FROM ships
+   INNER JOIN classes ON ships.class = classes.class
+   WHERE ships.launched = 1916
+   AND
+   classes.numguns >= 7
+
+5. SELECT outcomes.ship, battles.name AS battle, battles.date FROM outcomes
+   INNER JOIN battles ON outcomes.battle = battles.name
+   WHERE outcomes.result LIKE 'sunk'
+   ORDER BY battles.name
+
+6. SELECT ships.name, classes.displacement, ships.launched FROM ships
+   INNER JOIN classes ON ships.class = classes.class
+   WHERE ships.name = ships.class
+
+7. SELECT * FROM classes
+   WHERE classes.class NOT IN (SELECT ships.class FROM ships)
+
+8. SELECT ships.name, classes.displacement, classes.numguns, outcomes.result FROM ships
+   INNER JOIN classes ON ships.class = classes.class
+   INNER JOIN outcomes ON ships.name = outcomes.ship
+   WHERE outcomes.battle = 'North Atlantic'
+
+--------------------------------------------------------------------------------
+
+					Групиране
+				        Упражнения
+I. За базата от данни PC
+1. Напишете заявка, която извежда средната честота на персоналните компютри.
+2. Напишете заявка, която извежда средния размер на екраните на лаптопите за
+всеки производител.
+3. Напишете заявка, която извежда средната честота на лаптопите с цена над 1000.
+4. Напишете заявка, която извежда средната цена на персоналните компютри,
+произведени от производител ‘A’.
+5. Напишете заявка, която извежда средната цена на персоналните компютри и
+лаптопите за производител ‘B’.
+6. Напишете заявка, която извежда средната цена на персоналните компютри
+според различните им честоти.
+7. Напишете заявка, която извежда производителите, които са произвели поне 3
+различни персонални компютъра (с различен код).
+8. Напишете заявка, която извежда производителите с най-висока цена на
+персонален компютър.
+9. Напишете заявка, която извежда средната цена на персоналните компютри за
+всяка честота по-голяма от 800.
+10.Напишете заявка, която извежда средния размер на диска на тези персонални
+компютри, произведени от производители, които произвеждат и принтери.
+Резултатът да се изведе за всеки отделен производител.
+
+II. За базата от данни SHIPS
+1. Напишете заявка, която извежда броя на класовете бойни кораби.
+2. Напишете заявка, която извежда средния брой оръдия за всеки клас боен кораб.
+3. Напишете заявка, която извежда средния брой оръдия за всички бойни кораби.
+4. Напишете заявка, която извежда за всеки клас първата и последната година, в
+която кораб от съответния клас е пуснат на вода.
+5. Напишете заявка, която извежда броя на корабите, потънали в битка според
+класа.
+6. Напишете заявка, която извежда броя на корабите, потънали в битка според
+класа, за тези класове с повече от 2 кораба.
+7. Напишете заявка, която извежда средния калибър на оръдията на корабите за
+всяка страна.
+
+TASK 1
+-----------------------------------------------------------------------------------------
+1. SELECT ROUND(AVG(pc.speed)) as 'Average speed'  -> вярно е
+   FROM pc
+
+2. SELECT product.maker, ROUND(AVG(laptop.screen)) as AverageScreen FROM product
+   INNER JOIN laptop ON product.model = laptop.model
+   WHERE product.type = 'Laptop'
+   GROUP BY product.maker;
+
+3. SELECT ROUND(AVG(laptop.speed), 2) as AverageSpeed FROM laptop
+   WHERE laptop.price > 1000;
+
+4. SELECT product.maker, ROUND(AVG(pc.price), 2) as AveragePrice FROM pc
+   INNER JOIN product ON pc.model = product.model
+   WHERE product.maker = 'A'
+   GROUP BY product.maker;
+
+5. SELECT maker, AVG(price) as AveragePrice FROM
+   (SELECT pc.price, pc.model FROM pc
+    UNION ALL
+    SELECT laptop.price, laptop.model FROM laptop) as m
+   INNER JOIN product ON product.model = m.model
+   WHERE product.maker = 'B'
+   GROUP BY maker;
+
+От упражнение:
+SELECT AVG(price)
+FROM (
+SELECT price
+FROM pc
+WHERE model IN (SELECT model FROM product WHERE maker = 'B')
+UNION ALL
+SELECT price
+FROM laptop
+WHERE model IN (SELECT model FROM product WHERE maker = 'B')
+)d;
+
+SELECT AVG(price)
+FROM (
+SELECT price, maker
+FROM pc
+JOIN product p ON pc.model = p.model
+UNION ALL
+SELECT price
+FROM laptop
+JOIN product p ON l.model = p.model
+)d
+WHERE d.maker = 'B';
+
+SELECT AVG(COALESCE(pc.price, l.price))
+FROM product p
+LEFT JOIN pc ON p.model = pc.model
+LEFT JOIN laptop ON l p.model = l.model
+WHERE p.maker = 'B';
+
+6. SELECT AVG(price) 
+   FROM pc 
+   GROUP BY speed;
+
+7. SELECT product.maker, COUNT(pc.code) as NumPC FROM product
+   INNER JOIN pc ON product.model = pc.model
+   GROUP BY product.maker
+   Having COUNT(pc.code) >= 3;
+
+SELECT maker, COUNT(DISTINCT pc.code)
+FROM product p
+JOIN pc ON p.model = pc.model
+GROUP BY maker
+HAVING COUNT (DISTINCT pc.code) >= 3;
+
+8. SELECT product.maker, pc.price as MaxPrice FROM product
+   INNER JOIN pc ON product.model = pc.model
+   WHERE pc.price = (SELECT MAX(one.price) FROM pc one);
+
+9. SELECT pc.speed, AVG(pc.price) as AveragePrice FROM pc
+   WHERE pc.speed > 800
+   GROUP BY pc.speed;
+
+10. SELECT product.maker, AVG(pc.hd) as AverageHDD FROM pc
+    INNER JOIN product ON pc.model = product.model         
+    INNER JOIN product two ON product.maker = two.maker
+    WHERE
+    product.type = 'PC' AND two.type = 'Printer'
+    GROUP BY product.maker;
+
+SELECT AVG(hd)
+FROM pc
+JOIN product p ON pc.model = p.model
+WHERE maker IN (SELECT maker FROM product WHERE type = 'Printer')
+GROUP BY maker
+-----------------------------------------------------------------------------------------
+
+TASK 2
+-----------------------------------------------------------------------------------------
+1. SELECT COUNT(classes.class) as Number FROM classes
+   WHERE classes.type = 'bb';
+
+2. SELECT classes.class, AVG(classes.numguns) as AverageNumguns FROM classes
+   WHERE classes.type LIKE 'bb'
+   GROUP BY classes.class;
+
+3. SELECT classes.type, AVG(classes.numguns) as AverageNumguns FROM classes
+   WHERE classes.type LIKE 'bb'
+   GROUP BY classes.type;
+
+4. SELECT ships.class, MIN(ships.launched) as FirstYear FROM ships
+   FULL OUTER JOIN outcomes ON ships.name = outcomes.ship
+   FULL OUTER JOIN battles ON outcomes.battle = battles.name
+   GROUP BY ships.class;
+
+   SELECT ships.class, MIN(ships.launched) as FirstYear, battles.date as LastYear FROM ships
+   FULL OUTER JOIN outcomes ON ships.name = outcomes.ship
+   FULL OUTER JOIN battles ON outcomes.battle = battles.name
+   GROUP BY ships.class;
+
+5. SELECT ships.class, COUNT(outcomes.ship) as NumberSunk FROM ships
+   INNER JOIN outcomes ON ships.name = outcomes.ship
+   WHERE outcomes.result = 'sunk'
+   GROUP BY ships.class;
+
+6. SELECT ships.class, COUNT(ships.class) as NumberShips FROM ships
+   INNER JOIN outcomes ON ships.name = outcomes.ship
+   WHERE outcomes.result = 'sunk'
+   AND 
+   EXISTS (SELECT class, COUNT(class) FROM ships
+	   GROUP BY class
+	   Having COUNT(class) > 2)
+   GROUP BY ships.class
+   Having COUNT(ships.class) > 0
+
+--Класовете кораби с повече от 2 кораба
+SELECT class, COUNT(*) FROM ships 
+GROUP BY class
+HAVING COUNT (*) > 2
+
+--Корабите, които са потънали в битка
+SELECT ship FROM outcomes WHERE result = 'sunk'
+
+SELECT class, COUNT(*)
+FROM ship
+WHERE name IN (SELECT ship FROM outcomes WHERE result = 'sunk')
+AND class IN (SELECT class, COUNT(*) FROM ships 
+	      GROUP BY class
+	      HAVING COUNT (*) > 2);
+GROUP BY class
+
+7. SELECT classes.country, AVG(classes.bore) as AverageBore 
+   FROM classes
+   GROUP BY classes.country
+
+-----------------------------------------------------------------------------------------
+
+				     SQL заявки - общи задачи
+				             Упражнения
+I. За базата от данни MOVIES
+1. Напишете заявка, която извежда заглавие и година на всички филми, които са
+по-дълги от 120 минути и са снимани преди 2000 г. Ако дължината на филма е
+неизвестна, заглавието и годината на този филм също да се изведат.
+2. Напишете заявка, която извежда име и пол на всички актьори (мъже и жени),
+чието име започва с 'J' и са родени след 1948 година. Резултатът да бъде
+подреден по име в намаляващ ред.
+3. Напишете заявка, която извежда име на студио и брой на актьорите,
+участвали във филми, които са създадени от това студио.
+4. Напишете заявка, която за всеки актьор извежда име на актьора и броя на
+филмите, в които актьорът е участвал.
+5. Напишете заявка, която за всяко студио извежда име на студиото и заглавие
+на филма, излязъл последно на екран за това студио.
+6. Напишете заявка, която извежда името на най-младия актьор (мъж).
+7. Напишете заявка, която извежда име на актьор и име на студио за тези
+актьори, участвали в най-много филми на това студио.
+8. Напишете заявка, която извежда заглавие и година на филма, и брой на
+актьорите, участвали в този филм за тези филми с повече от двама актьори.
+
+II. За базата от данни SHIPS
+1. Напишете заявка, която извежда имената на всички кораби без повторения,
+които са участвали в поне една битка и чиито имена започват с C или K.
+2. Напишете заявка, която извежда име и държава на всички кораби, които
+никога не са потъвали в битка (може и да не са участвали).
+3. Напишете заявка, която извежда държавата и броя на потъналите кораби за
+тази държава. Държави, които нямат кораби или имат кораб, но той не е
+участвал в битка, също да бъдат изведени.
+4. Напишете заявка, която извежда име на битките, които са по-мащабни (с
+повече участващи кораби) от битката при Guadalcanal.
+5. Напишете заявка, която извежда име на битките, които са по-мащабни (с
+повече участващи страни) от битката при Surigao Strait.
+6. Напишете заявка, която извежда имената на най-леките кораби с най-много
+оръдия.
+7. Изведете броя на корабите, които са били увредени в битка, но са били
+поправени и по-късно са победили в друга битка.
+8. Изведете име на корабите, които са били увредени в битка, но са били
+поправени и по-късно са победили в по-мащабна битка (с повече кораби).
+
+III. За базата от данни PC
+1. Напишете заявка, която извежда всички модели лаптопи, за които се
+предлагат както разновидности с 15" екран, така и с 11" екран.
+2. Да се изведат различните модели компютри, чиято цена е по-ниска от найевтиния лаптоп, произвеждан
+от същия производител.
+3. Един модел компютри може да се предлага в няколко разновидности с
+различна цена. Да се изведат тези модели компютри, чиято средна цена (на
+различните му разновидности) е по-ниска от най-евтиния лаптоп, произвеждан
+от същия производител.
+4. Напишете заявка, която извежда за всеки компютър код на продукта,
+производител и брой компютри, които имат цена, по-голяма или равна на
+неговата.
+
+TASK 1
+---------------------------------------------------------------------------------------------
+1. SELECT movie.title, movie.year, movie.length
+   FROM movie
+   WHERE movie.length > 120 
+   AND 
+   movie.year < 2000
+   OR
+   movie.length IS NULL
+
+2. SELECT ms.name, ms.gender 
+   FROM moviestar ms
+   WHERE ms.name LIKE 'J%'
+   ORDER BY ms.name DESC
+
+3. SELECT studio.name, COUNT(DISTINCT starsin.starname) as NumberActors
+   FROM studio
+   INNER JOIN movie ON studio.name = movie.studioname
+   INNER JOIN starsin ON movie.title = starsin.movietitle
+   GROUP BY studio.name
+
+4. SELECT starsin.starname, COUNT(starsin.movietitle) as NumberFilms
+   FROM starsin
+   GROUP BY starsin.starname
+
+5. SELECT m.studioname, mov.title, m.LastYear
+   FROM (
+	   SELECT movie.studioname, MAX(movie.year) as LastYear
+	   FROM movie
+	   GROUP BY movie.studioname) as m
+   INNER JOIN movie mov ON m.LastYear = mov.year
+   ORDER BY m.studioname DESC;
+
+6. SELECT moviestar.name
+   FROM moviestar
+   WHERE
+   moviestar.birthdate = (SELECT MAX(moviestar.birthdate) FROM moviestar WHERE moviestar.gender = 'M')
+
+---------------------------------------------------------------------------------------------
+
+TASK 2
+---------------------------------------------------------------------------------------------
+1. SELECT DISTINCT outcomes.ship FROM outcomes
+   WHERE outcomes.ship LIKE 'C%'
+   OR
+   outcomes.ship LIKE 'K%'
+
+2. SELECT DISTINCT s1.name, cl1.country FROM ships s1
+   INNER JOIN classes cl1 ON s1.class = cl1.class
+   EXCEPT
+   SELECT DISTINCT s2.name, cl2.country FROM ships s2
+   INNER JOIN classes cl2 ON s2.class = cl2.class
+   INNER JOIN outcomes ON s2.name = outcomes.ship
+   WHERE outcomes.result LIKE 'sunk'
+
+---------------------------------------------------------------------------------------------
+
+Тема 8
+
+		Модификации на данните в базата от данни
+				Упражнение
+Използвайте редуцираните скриптове за Movies, PC и Ships.
+Извършете следните модификации в базата от данни Movies:
+1. Да се вмъкне информация за актрисата Nicole Kidman. За нея знаем само, че е родена на
+20.06.1967.
+2. Да се изтрият всички продуценти с нетни активи под 30 милиона.
+3. Да се изтрие информацията за всички филмови звезди, за които не се знае адреса.
+Извършете следните модификации в базата от данни PC:
+4. Използвайте две INSERT заявки. Съхранете в базата данни факта, че персонален компютър
+модел 1100 е направен от производителя C, има процесор 2400 MHz, RAM 2048 MB, твърд диск
+500 GB, 52x оптично дисково устройство и струва $299. Нека новият компютър има код 12.
+Забележка: модел и CD са от тип низ.
+5. Да се изтрие наличната информация в таблицата PC за компютри модел 1100.
+6. Да се изтрият от таблицата Laptop всички лаптопи, направени от производител, който не
+произвежда принтери.
+7. Производител А купува производител B. На всички продукти на В променете производителя да
+бъде А.
+8. Да се намали наполовина цената на всеки компютър и да се добавят по 20 GB към всеки твърд
+диск.
+9. За всеки лаптоп от производител B добавете по един инч към диагонала на екрана.
+Извършете следните модификации в базата от данни Ships:
+10. Два британски бойни кораба от класа Nelson - Nelson и Rodney - са били пуснати на вода
+едновременно през 1927 г. Имали са девет 16-инчови оръдия (bore) и водоизместимост от 34000
+тона (displacement). Добавете тези факти към базата от данни.
+11. Изтрийте от таблицата Ships всички кораби, които са потънали в битка.
+12. Променете данните в релацията Classes така, че калибърът (bore) да се измерва в сантиметри (в
+момента е в инчове, 1 инч ~ 2.5 см) и водоизместимостта да се измерва в метрични тонове (1 м.т.
+= 1.1 т.)
+
+II PC
+
+4. INSERT INTO product (maker, model, type) 
+		VALUES ('C', '1100', 'PC');
+INSERT INTO pc (code, model, speed, ram, hd, cd, price) 
+	VALUES (12, '1100', 2400q 2048, 500, '52x', 299);
+
+5. SELECT * FROM pc WHERE model = '1100';
+DELETE FROM pc WHERE model = '1100';
+
+6. SELECT * 
+FROM product 
+WHERE maker NOT IN (SELECT maker FROM product WHERE type = 'Printer');
+AND type = 'Laptop'
+
+DELETE 
+FROM laptop 
+WHERE model IN (SELECT * 
+		FROM product 
+		WHERE maker NOT IN (SELECT maker FROM product WHERE type = 'Printer')
+		AND type = 'Laptop');
+
+DELETE 
+FROM laptop 
+WHERE model IN (SELECT * 
+		FROM product 
+		WHERE maker NOT IN (SELECT maker FROM product WHERE type = 'Printer');
+
+7. UPDATE product
+   SET maker = 'A'
+   WHERE maker = 'B'
+
+8. UPDATE pc 
+   SET hd = hd + 20, 
+   price = price/2;
+
+9. SELECT mode, screen, screen + 1
+   FROM laptop
+   WHERE model IN (SELECT model FROM product WHERE maker = 'B');
+
+UPDATE laptop 
+SET screen = screen + 1
+WHERE model IN (SELECT model FROM product WHERE maker = 'B');
